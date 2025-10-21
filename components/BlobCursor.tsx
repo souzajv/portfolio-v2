@@ -58,39 +58,47 @@ export default function BlobCursor({
   }, []);
 
   const handleMove = useCallback(
-    (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-      const { left, top } = updateOffset();
-      const x = 'clientX' in e ? e.clientX : e.touches[0].clientX;
-      const y = 'clientY' in e ? e.clientY : e.touches[0].clientY;
-
+    (clientX: number, clientY: number) => {
+      // Use viewport coordinates directly. Blob container fills the viewport.
       blobsRef.current.forEach((el, i) => {
         if (!el) return;
         const isLead = i === 0;
         gsap.to(el, {
-          x: x - left,
-          y: y - top,
+          x: clientX,
+          y: clientY,
           duration: isLead ? fastDuration : slowDuration,
           ease: isLead ? fastEase : slowEase
         });
       });
     },
-    [updateOffset, fastDuration, slowDuration, fastEase, slowEase]
+    [fastDuration, slowDuration, fastEase, slowEase]
   );
 
   useEffect(() => {
     const onResize = () => updateOffset();
     window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [updateOffset]);
+
+    const onMouse = (ev: MouseEvent) => {
+      handleMove(ev.clientX, ev.clientY);
+    };
+
+    const onTouch = (ev: TouchEvent) => {
+      if (!ev.touches || ev.touches.length === 0) return;
+      handleMove(ev.touches[0].clientX, ev.touches[0].clientY);
+    };
+
+    window.addEventListener('mousemove', onMouse, { passive: true });
+    window.addEventListener('touchmove', onTouch, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('mousemove', onMouse);
+      window.removeEventListener('touchmove', onTouch);
+    };
+  }, [updateOffset, handleMove]);
 
   return (
-    <div
-      ref={containerRef}
-      onMouseMove={handleMove}
-      onTouchMove={handleMove}
-      className="relative top-0 left-0 w-full h-full"
-      style={{ zIndex }}
-    >
+    <div ref={containerRef} className="relative top-0 left-0 w-full h-full" style={{ zIndex }}>
       {useFilter && (
         <svg className="absolute w-0 h-0">
           <filter id={filterId}>
@@ -114,12 +122,24 @@ export default function BlobCursor({
             style={{
               width: sizes[i],
               height: sizes[i],
-              borderRadius: blobType === 'circle' ? '50%' : '0',
-              backgroundColor: fillColor,
-              opacity: opacities[i],
-              boxShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px 0 ${shadowColor}`
+              opacity: opacities[i]
             }}
           >
+            {/* visual square rotated 45deg inside moving wrapper */}
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                transform: 'rotate(45deg)',
+                backgroundColor: fillColor,
+                borderRadius: blobType === 'circle' ? '50%' : '0',
+                boxShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px 0 ${shadowColor}`,
+                position: 'absolute',
+                left: 0,
+                top: 0
+              }}
+            />
+
             <div
               className="absolute"
               style={{
