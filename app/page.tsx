@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState, type ElementType, type FormEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type ElementType } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -12,6 +12,7 @@ import {
   ArrowUpRight,
   BarChart3,
   Bot,
+  Calendar,
   BrainCircuit,
   BrainCog,
   Code,
@@ -20,7 +21,6 @@ import {
   Layers,
   Linkedin,
   Mail,
-  MessageSquare,
   Palette,
   Phone,
   Rocket,
@@ -399,6 +399,23 @@ export default function Home() {
   const pageRef = useRef<HTMLElement | null>(null);
   const heroMediaRef = useRef<HTMLDivElement | null>(null);
 
+  const handleSmoothAnchorClick = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, selector: string) => {
+      if (typeof window === 'undefined') return;
+      event.preventDefault();
+
+      const target = document.querySelector(selector);
+      if (!target) return;
+
+      gsap.to(window, {
+        scrollTo: { y: target, offsetY: 96, autoKill: true },
+        duration: 0.9,
+        ease: 'power3.out'
+      });
+    },
+    []
+  );
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -434,15 +451,15 @@ export default function Home() {
 
       const sectionTargets = gsap.utils.toArray<HTMLElement>('[data-animate="section"]');
       sectionTargets.forEach(element => {
-        gsap.set(element, { autoAlpha: 0, y: 60 });
+        gsap.set(element, { autoAlpha: 0, y: 40 });
         gsap.to(element, {
           autoAlpha: 1,
           y: 0,
-          duration: 1,
+          duration: 0.85,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: element,
-            start: 'top 85%',
+            start: 'top 92%',
             toggleActions: 'play none none none'
           }
         });
@@ -568,10 +585,6 @@ export default function Home() {
     };
   }, []);
 
-  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
-
   return (
     <main ref={pageRef} className="relative min-h-screen text-foreground">
 
@@ -604,7 +617,10 @@ export default function Home() {
             <div className="flex flex-wrap items-center gap-4">
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button asChild size="lg" className="gap-2">
-                  <Link href="#projetos">
+                  <Link
+                    href="#projetos"
+                    onClick={event => handleSmoothAnchorClick(event, '#projetos')}
+                  >
                     Ver projetos
                     <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -612,7 +628,10 @@ export default function Home() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button asChild variant="secondary" size="lg" className="gap-2">
-                  <Link href="#contato">
+                  <Link
+                    href="#contato"
+                    onClick={event => handleSmoothAnchorClick(event, '#contato')}
+                  >
                     Contato
                     <ArrowUpRight className="h-4 w-4" />
                   </Link>
@@ -857,7 +876,7 @@ export default function Home() {
 
       <section id="contato" className="px-6 py-24" data-animate="section">
         <div className="mx-auto grid w-full max-w-6xl gap-12 rounded-3xl border border-(--stroke-color) bg-(--background-80) p-10 backdrop-blur lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="space-y-6" data-animate="item">
+          <div className="space-y-6 flex flex-col" data-animate="item">
             <Badge variant="secondary" className="bg-background text-(--foreground-80)">
               [Contato]
             </Badge>
@@ -886,54 +905,55 @@ export default function Home() {
             </div>
           </div>
 
-          <form onSubmit={handleContactSubmit} className="grid gap-5" data-animate="item">
-            <div className="grid gap-2">
-              <label htmlFor="name" className="text-xs uppercase tracking-widest text-muted-foreground">
-                Nome
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="rounded-2xl border border-(--stroke-color) bg-(--background-70) px-4 py-3 text-sm text-foreground focus:border-(--stroke-color) focus:outline-none focus:ring-2 focus:ring-(--stroke-color)"
-              />
+          <div className="grid gap-6" data-animate="item">
+            <div className="flex flex-col justify-between rounded-3xl border border-dashed border-(--stroke-color) bg-(--background-70) px-6 py-7">
+              <div className="flex flex-col gap-4">
+                <div className="">
+                  <span className="text-xs uppercase tracking-widest text-(--foreground-60)">Reuniões</span>
+                  <h3 className="mt-3 text-xl font-semibold text-foreground">Prefere agendar um papo?</h3>
+                </div>
+                <p className="mt-3 text-sm text-(--foreground-70)">
+                  Podemos alinhar expectativas em uma reunião rápida. Me envie uma mensagem com a agenda ideal ou peça um convite pelo WhatsApp.
+                </p>
+                <ul className="mt-4 space-y-2 text-sm text-(--foreground-60)">
+                  <li className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-primary" aria-hidden="true" />
+                    Calls de briefing (15-30 min)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-primary" aria-hidden="true" />
+                    Reviews de produto ou design
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-primary" aria-hidden="true" />
+                    Sprints e co-criações estratégicas
+                  </li>
+                </ul>
+              </div>
+              <Button
+                asChild
+                variant="default"
+                size="lg"
+                className="mt-6 flex items-center justify-between gap-2"
+              >
+                <a
+                  href="https://wa.me/5531971957015?text=Oi%20Jo%C3%A3o!%20Quero%20agendar%20uma%20reuni%C3%A3o."
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex w-full items-center justify-between gap-2"
+                >
+                  Solicitar reunião
+                  <Calendar className="h-4 w-4" />
+                </a>
+              </Button>
             </div>
-            <div className="grid gap-2">
-              <label htmlFor="email" className="text-xs uppercase tracking-widest text-muted-foreground">
-                E-mail
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="rounded-2xl border border-(--stroke-color) bg-(--background-70) px-4 py-3 text-sm text-foreground focus:border-(--stroke-color) focus:outline-none focus:ring-2 focus:ring-(--stroke-color)"
-              />
-            </div>
-            <div className="grid gap-2">
-              <label htmlFor="message" className="text-xs uppercase tracking-widest text-muted-foreground">
-                Mensagem
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                required
-                className="resize-none rounded-2xl border border-(--stroke-color) bg-(--background-70) px-4 py-3 text-sm text-foreground focus:border-(--stroke-color) focus:outline-none focus:ring-2 focus:ring-(--stroke-color)"
-              />
-            </div>
-            <Button type="submit" className="flex items-center justify-between gap-2">
-              Enviar mensagem
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </form>
+          </div>
         </div>
       </section>
 
       <footer className="px-6 pb-12">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 border-t border-(--stroke-color) pt-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} João Victor Souza Campos. Todos os direitos reservados.</span>
+          <span>© {new Date().getFullYear()} João Victor de Souza Campos. Todos os direitos reservados.</span>
           <span className="text-(--muted-foreground-70)">Design + Código por João Victor, impulsionado por curiosidade e propósito.</span>
         </div>
       </footer>
