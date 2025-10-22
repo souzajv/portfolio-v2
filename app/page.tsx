@@ -13,6 +13,7 @@ import {
   BarChart3,
   Bot,
   BrainCircuit,
+  BrainCog,
   Code,
   ExternalLink,
   Github,
@@ -22,10 +23,12 @@ import {
   MessageSquare,
   Palette,
   Phone,
+  Rocket,
   Server,
   Sparkles,
   Target,
-  TrendingUp
+  TrendingUp,
+  Users
 } from 'lucide-react';
 import PillNav, { type PillNavItem } from '@/components/PillNav';
 import TiltedCard from '@/components/TiltedCard';
@@ -241,14 +244,6 @@ const experiencesData: ExperienceItem[] = [
     highlights: ['Design System', 'Next.js + Tailwind', 'Produto & Segurança']
   },
   {
-    title: 'Inteli Júnior',
-    subtitle: 'Desenvolvedor Front-end e UX/UI Designer',
-    period: '2025 • Atual',
-    description:
-      'Desenvolvimento de soluções digitais do Figma ao código, sempre com cadência ágil e foco em entregas de impacto.',
-    highlights: ['Metodologias ágeis', 'Discovery contínuo', 'UX Research']
-  },
-  {
     title: 'TanTech',
     subtitle: 'Diretor da TanTech',
     period: '2024 • Atual',
@@ -256,7 +251,14 @@ const experiencesData: ExperienceItem[] = [
       'Desenvolvo tecnologias para ampliar o alcance digital da Atlética, explorando stacks modernas e operações colaborativas.',
     highlights: ['Liderança técnica', 'Automação', 'Branding digital']
   },
-
+  {
+    title: 'Inteli Júnior',
+    subtitle: 'Desenvolvedor Front-end e UX/UI Designer',
+    period: '2025 • Atual',
+    description:
+      'Desenvolvimento de soluções digitais do Figma ao código, sempre com cadência ágil e foco em entregas de impacto.',
+    highlights: ['Metodologias ágeis', 'Discovery contínuo', 'UX Research']
+  },
 ];
 
 const createPlaceholder = (label: string) =>
@@ -266,33 +268,61 @@ const createPlaceholder = (label: string) =>
 
 const projectCards: ProjectCard[] = [
   {
-    title: 'Compass | Modelo preditivo',
-    description: 'Modelo preditivo para apoiar a retenção de clientes com insights claros e acionáveis.',
-    stack: ['Python', 'Machine Learning', 'Data Analysis'],
+    title: 'Oracle Academy | Game Educacional',
+    description: 'Game imersivo para potencializar aprendizagem com gamificação e storytelling.',
+    stack: ['Phaser.js', 'UX/UI Design', 'Gamificação'],
     image: createPlaceholder(''),
     link: '#'
   },
   {
     title: 'Parceiros Voluntários | Plataforma Social',
     description: 'Ecosistema digital para conectar pessoas e causas com foco em impacto social.',
-    stack: ['JavaScript', 'Sails.js', 'PostgreSQL', 'UX'],
+    stack: ['JavaScript', 'Sails.js', 'PostgreSQL', 'UX/UI Design'],
     image: createPlaceholder(''),
     link: '#'
   },
   {
-    title: 'Vision Academy | Game Educacional',
-    description: 'Game imersivo para potencializar aprendizagem com gamificação e storytelling.',
-    stack: ['Phaser', 'UX Design', 'Gamificação'],
+    title: 'Compass | Modelo Preditivo',
+    description: 'Modelo preditivo para apoiar a retenção de clientes com insights claros e acionáveis.',
+    stack: ['Python', 'Machine Learning', 'Data Analysis', 'UX/UI Design'],
+    image: createPlaceholder(''),
+    link: '#'
+  },
+  {
+    title: 'Abundance Brasil | Sistema IoT',
+    description: 'Sistema IoT para monitoramento e gestão de recursos florestais.',
+    stack: ['JavaScript', 'C++ & C#', 'Next.js', 'UX/UI Design'],
+    image: createPlaceholder(''),
+    link: '#'
+  },
+  {
+    title: 'Centro Paula Souza | Plataforma de Gestão',
+    description: 'Plataforma de gestão inclusiva para alunos com deficiência (PCD)',
+    stack: ['TypeScript', 'VLibras', 'Docker', 'Angular.js', 'UX/UI Design'],
+    image: createPlaceholder(''),
+    link: '#'
+  },
+  {
+    title: 'BTG Pactual | App de Recomendação',
+    description: 'Aplicativo de recomendação para assessores monitorarem carteiras de investimentos de seus clientes.',
+    stack: ['.NET', 'PostgreSQL', 'Docker', 'React Native', 'UX/UI Design'],
     image: createPlaceholder(''),
     link: '#'
   },
   {
     title: 'CamelSec | Dashboard ISO/LGPD',
     description: 'Painel para gestão de conformidade, facilitando decisões com dados confiáveis.',
-    stack: ['React.js', 'Data Visualization', 'UX'],
+    stack: ['React.js', 'Data Visualization', 'UX/UI Design'],
     image: createPlaceholder(''),
     link: '#'
-  }
+  },
+  {
+    title: 'ComGás | Dashboard de Análise de Qualidade',
+    description: 'Dashboard inteligente com IA para identificar riscos e oportunidades em chamadas de atendimento ao cliente.',
+    stack: ['Vite.js', 'Data Visualization', 'UX/UI Design'],
+    image: createPlaceholder(''),
+    link: '#'
+  },
 ];
 
 const certifications: CertificationItem[] = [
@@ -308,9 +338,19 @@ const impactItems: ImpactItem[] = [
     icon: Sparkles
   },
   {
+    title: 'Colaborador Manifesto Inteli',
+    description: 'Colaborei na elaboração do Manifesto do Inteli, promovendo valores de inovação e excelência acadêmica para nossos futuros alunos.',
+    icon: Users
+  },
+  {
+    title: 'CodeClub Inteli',
+    description: 'Ministro aulas de programação para alunos do Ensino Fundamental I e II em uma organização voltada para a rede pública estadual de São Paulo.',
+    icon: Rocket
+  },
+  {
     title: 'Diretor da TanTech',
     description: 'Coordeno iniciativas tecnológicas da Atlética Tantera, garantindo execução com impacto real.',
-    icon: MessageSquare
+    icon: BrainCog
   },
   {
     title: 'Foco em propósito',
@@ -318,7 +358,6 @@ const impactItems: ImpactItem[] = [
     icon: Target
   }
 ];
-
 
 const careerTimeline = experiencesData.map(experience => ({
   title: experience.title,
@@ -892,7 +931,7 @@ export default function Home() {
         </div>
       </section>
 
-  <footer className="px-6 pb-12">
+      <footer className="px-6 pb-12">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 border-t border-(--stroke-color) pt-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
           <span>© {new Date().getFullYear()} João Victor Souza Campos. Todos os direitos reservados.</span>
           <span className="text-(--muted-foreground-70)">Design + Código por João Victor, impulsionado por curiosidade e propósito.</span>

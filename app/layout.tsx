@@ -31,17 +31,17 @@ export default function RootLayout({
               blobType="square"
               fillColor="#4b5563"
               trailCount={3}
-              sizes={[28, 48, 30]}
-              innerSizes={[8, 14, 10]}
+              sizes={[18, 34, 20]}
+              innerSizes={[6, 10, 6]}
               innerColor="rgba(255,255,255,0.06)"
-              opacities={[0.95, 0.8, 0.65]}
-              shadowColor="rgba(0,0,0,0.45)"
-              shadowBlur={3}
-              shadowOffsetX={3}
-              shadowOffsetY={3}
+              opacities={[0.98, 0.85, 0.7]}
+              shadowColor="rgba(0,0,0,0.35)"
+              shadowBlur={2}
+              shadowOffsetX={2}
+              shadowOffsetY={2}
               useFilter={false}
-              fastDuration={0.03}
-              slowDuration={0.55}
+              fastDuration={0.02}
+              slowDuration={0.6}
               zIndex={9999}
             />
           </div>
