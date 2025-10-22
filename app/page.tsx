@@ -892,7 +892,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="px-6 pb-12" data-animate="section">
+  <footer className="px-6 pb-12">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 border-t border-(--stroke-color) pt-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
           <span>© {new Date().getFullYear()} João Victor Souza Campos. Todos os direitos reservados.</span>
           <span className="text-(--muted-foreground-70)">Design + Código por João Victor, impulsionado por curiosidade e propósito.</span>
