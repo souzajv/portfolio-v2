@@ -41,12 +41,18 @@ export default function RadialOrbitalTimeline({
   const orbitRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
-  const BASE_NODE_SIZE = 56;
-  const ICON_SIZE = 22;
-  const LABEL_OFFSET = BASE_NODE_SIZE / 2 + 28;
-  const CARD_OFFSET = BASE_NODE_SIZE + 60;
-  const GLOW_EXTRA = 28;
-  const ORBIT_DIAMETER = 440;
+  // Responsividade: evitar hydration mismatch
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 640);
+  }, []);
+
+  const BASE_NODE_SIZE = isMobile ? 32 : 56;
+  const ICON_SIZE = isMobile ? 14 : 22;
+  const LABEL_OFFSET = BASE_NODE_SIZE / 2 + (isMobile ? 12 : 28);
+  const CARD_OFFSET = BASE_NODE_SIZE + (isMobile ? 28 : 60);
+  const GLOW_EXTRA = isMobile ? 10 : 28;
+  const ORBIT_DIAMETER = isMobile ? 260 : 440;
   const ORBIT_RADIUS = ORBIT_DIAMETER / 2 - BASE_NODE_SIZE * 0.3;
 
   useEffect(() => {
@@ -173,7 +179,7 @@ export default function RadialOrbitalTimeline({
   };
 
   const containerClasses = cn(
-    "relative w-full flex flex-col items-center justify-center",
+    "relative w-full flex flex-col items-center justify-center max-w-xs sm:max-w-md md:max-w-2xl mx-auto px-2",
     className
   );
 
@@ -186,7 +192,7 @@ export default function RadialOrbitalTimeline({
       ref={containerRef}
       onClick={handleContainerClick}
     >
-      <div className="relative w-full max-w-4xl flex-1 flex items-center justify-center">
+      <div className="relative w-full max-w-xs sm:max-w-md md:max-w-2xl flex-1 flex items-center justify-center mx-auto min-h-[140px]" style={{ height: isMobile ? '140px' : undefined }}>
         <div
           className="absolute w-full h-full flex items-center justify-center"
           ref={orbitRef}
@@ -210,13 +216,14 @@ export default function RadialOrbitalTimeline({
                 shouldAnimate && "animate-ping"
               )}
               style={{ animationDelay: "0.5s" }}
-            ></div>
+            >
+            </div>
             <div className="w-8 h-8 rounded-full bg-(--text-on-dark) opacity-80 backdrop-blur-md"></div>
           </div>
 
           <div
             className="absolute rounded-full border border-(--stroke-color)"
-            style={{ width: ORBIT_DIAMETER, height: ORBIT_DIAMETER }}
+            style={{ width: ORBIT_DIAMETER, height: ORBIT_DIAMETER, left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
           ></div>
 
           {timelineData.map((item, index) => {
@@ -280,11 +287,10 @@ export default function RadialOrbitalTimeline({
                 </div>
 
                 <div
-                  className={`absolute whitespace-nowrap font-semibold tracking-wide transition-all duration-300 ${isExpanded ? "text-(--text-on-dark)" : "text-(--foreground-80)"
-                    }`}
+                  className={`absolute font-semibold tracking-wide transition-all duration-300 max-w-[120px] truncate text-xs sm:text-sm ${isExpanded ? "text-(--text-on-dark)" : "text-(--foreground-80)"}`}
                   style={{
                     top: LABEL_OFFSET,
-                    fontSize: isExpanded ? "1rem" : "0.95rem",
+                    fontSize: isMobile ? (isExpanded ? "0.9rem" : "0.8rem") : (isExpanded ? "1rem" : "0.95rem"),
                   }}
                 >
                   {item.title}

@@ -202,19 +202,19 @@ const Gallery4 = ({
               return (
                 <CarouselItem
                   key={item.id}
-                  className="basis-[92%] px-6 py-4 sm:basis-[72%] md:basis-1/2 lg:basis-[44%] xl:basis-[36%]"
+                  className="basis-full sm:basis-[92%] px-2 sm:px-4 py-4 md:basis-1/2 lg:basis-[44%] xl:basis-[36%]"
                 >
                   <div
                     data-animate="item"
-                    className="group relative flex h-full min-h-96 flex-col overflow-hidden rounded-[28px] border border-(--stroke-color) bg-[linear-gradient(180deg,rgba(21,30,47,0.85)_0%,rgba(12,18,32,0.95)_65%,rgba(10,16,28,0.98)_100%)] shadow-[0_8px_32px_-12px_rgba(15,23,42,0.45)] backdrop-blur-sm transition-transform duration-300 ease-out hover:-translate-y-2 hover:border-primary/40 hover:shadow-[0_12px_32px_-8px_rgba(59,130,246,0.25)]"
+                    className="group relative flex h-full min-h-72 sm:min-h-96 flex-col overflow-hidden rounded-2xl sm:rounded-[28px] border border-(--stroke-color) bg-[linear-gradient(180deg,rgba(21,30,47,0.85)_0%,rgba(12,18,32,0.95)_65%,rgba(10,16,28,0.98)_100%)] shadow-[0_4px_16px_-6px_rgba(15,23,42,0.25)] sm:shadow-[0_8px_32px_-12px_rgba(15,23,42,0.45)] backdrop-blur-sm transition-transform duration-300 ease-out hover:-translate-y-2 hover:border-primary/40 hover:shadow-[0_12px_32px_-8px_rgba(59,130,246,0.25)]"
                   >
                     <div className="absolute inset-0">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover object-center w-full h-full transition-transform duration-500 group-hover:scale-105 rounded-2xl sm:rounded-[28px]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 92vw, (max-width: 1200px) 50vw, 33vw"
                       />
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,13,23,0.25)_0%,rgba(12,20,34,0.6)_40%,rgba(15,23,42,0.95)_100%)]" />
                       <div

@@ -471,7 +471,7 @@ const PillNav: React.FC<PillNavProps> = ({
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
           aria-expanded={isMobileMenuOpen}
-          className="md:hidden rounded-sm border-0 flex flex-col items-center justify-center gap-1 cursor-pointer p-0 relative"
+          className="md:hidden rounded-sm border-0 flex flex-col items-center justify-center gap-1 cursor-pointer p-0 relative bg-transparent"
           style={{
             width: 'var(--nav-h)',
             height: 'var(--nav-h)',
@@ -479,12 +479,12 @@ const PillNav: React.FC<PillNavProps> = ({
           }}
         >
           <span
-            className="hamburger-line w-4 h-0.5 rounded origin-center transition-all ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-            style={{ background: 'var(--pill-bg, #fff)', transitionDuration: '10ms' }}
+            className="hamburger-line w-4 h-0.5 rounded origin-center transition-all ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-white"
+            style={{ background: '#fff', transitionDuration: '10ms' }}
           />
           <span
-            className="hamburger-line w-4 h-0.5 rounded origin-center transition-all ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-            style={{ background: 'var(--pill-bg, #fff)', transitionDuration: '10ms' }}
+            className="hamburger-line w-4 h-0.5 rounded origin-center transition-all ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-white"
+            style={{ background: '#fff', transitionDuration: '10ms' }}
           />
         </button>
       </nav>
@@ -494,14 +494,14 @@ const PillNav: React.FC<PillNavProps> = ({
         className="md:hidden absolute top-[3em] left-4 right-4 rounded-[27px] shadow-[0_8px_32px_rgba(0,0,0,0.12)] origin-top"
         style={{
           ...cssVars,
-          background: 'var(--base, #f0f0f0)',
+          background: 'var(--surface-panel)',
           zIndex: 998
         }}
       >
         <ul className="list-none m-0 p-[3px] flex flex-col gap-[3px]">
           {items.map(item => {
             const defaultStyle: React.CSSProperties = {
-              background: 'var(--pill-bg, #fff)',
+              background: 'var(--pill-bg,)',
               color: 'var(--pill-text, #fff)'
             };
             const hoverIn = (e: React.MouseEvent<HTMLAnchorElement>) => {

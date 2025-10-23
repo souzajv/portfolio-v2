@@ -46,7 +46,7 @@ export default function TiltedCard({
   const rotateX = useSpring(baseRotateX, springValues);
   const rotateY = useSpring(baseRotateY, springValues);
   const scale = useSpring(1, springValues);
-  const resolvedContainerHeight = containerHeight ?? imageHeight;
+  const resolvedContainerHeight = containerHeight ?? 'auto';
 
   function handleMouse(e: React.MouseEvent<HTMLElement>) {
     if (!ref.current) return;
@@ -75,10 +75,10 @@ export default function TiltedCard({
   return (
     <figure
       ref={ref}
-      className="relative w-full h-full flex flex-col items-center justify-center"
+      className="relative w-full max-w-xs sm:max-w-md md:max-w-lg flex flex-col items-center justify-center aspect-3/4"
       style={{
-        height: resolvedContainerHeight,
-        width: containerWidth,
+        height: 'auto',
+        width: '100%',
         perspective: '800px'
       }}
       onMouseMove={handleMouse}
@@ -87,15 +87,16 @@ export default function TiltedCard({
     >
       {showMobileWarning && (
         <div className="absolute top-4 text-center text-sm block sm:hidden">
-          This effect is not optimized for mobile. Check on desktop.
+          Este efeito é otimizado para desktop. Veja no computador para experiência completa.
         </div>
       )}
 
       <motion.div
-        className="relative"
+        className="relative w-full h-full"
         style={{
-          width: imageWidth,
-          height: imageHeight,
+          width: '100%',
+          height: '100%',
+          aspectRatio: '3/4',
           rotateX,
           rotateY,
           scale,
@@ -106,19 +107,21 @@ export default function TiltedCard({
           src={imageSrc}
           alt={altText}
           className={cn(
-            'absolute top-0 left-0 object-cover will-change-transform',
-            imageClassName ? imageClassName : 'rounded-[15px]'
+            'object-cover w-full h-full rounded-2xl border-2 border-(--stroke-color) shadow-[0_8px_24px_-8px_rgba(15,23,42,0.18)]',
+            imageClassName
           )}
           style={{
-            width: imageWidth,
-            height: imageHeight,
+            width: '100%',
+            height: '100%',
+            aspectRatio: '3/4',
+            objectFit: 'cover',
             transform: 'translateZ(0)'
           }}
         />
 
         {displayOverlayContent && overlayContent && (
           <motion.div
-            className="absolute top-0 left-0 will-change-transform"
+            className="absolute left-1/2 bottom-4 -translate-x-1/2 w-[90%] max-w-full"
             style={{ zIndex: 2, transform: 'translateZ(30px)' }}
           >
             {overlayContent}

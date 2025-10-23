@@ -617,7 +617,7 @@ export default function Home() {
 
       <section id="hero" className="relative flex min-h-screen items-center overflow-x-hidden px-6 py-24">
 
-        <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-16 md:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-8 sm:gap-16 md:grid-cols-[minmax(0,1fr)_360px]">
           <div className="space-y-6" data-animate="hero">
             <Badge variant="secondary" className="bg-background text-(--text-muted-dark)">
               [Design Engineer]
@@ -632,7 +632,7 @@ export default function Home() {
 
             <div className="flex flex-wrap items-center gap-4">
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button asChild size="lg" className="gap-2">
+                <Button asChild size="lg" className="gap-2 text-base sm:text-lg px-4 py-2 sm:px-6 sm:py-3">
                   <Link
                     href="#projetos"
                     onClick={event => handleSmoothAnchorClick(event, '#projetos')}
@@ -643,7 +643,7 @@ export default function Home() {
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button asChild variant="secondary" size="lg" className="gap-2">
+                <Button asChild variant="secondary" size="lg" className="gap-2 text-base sm:text-lg px-4 py-2 sm:px-6 sm:py-3">
                   <Link
                     href="#contato"
                     onClick={event => handleSmoothAnchorClick(event, '#contato')}
@@ -685,8 +685,8 @@ export default function Home() {
               showMobileWarning={false}
               imageClassName="rounded-3xl border-2 border-(--stroke-color) shadow-[0_30px_80px_rgba(15,23,42,0.35)]"
               overlayContent={
-                <div className="pointer-events-none relative flex h-[520px] w-full items-end justify-center">
-                  <span className="w-[90%] mb-6 rounded-full border border-(--stroke-color) bg-(--muted-foreground)/20 px-6 py-3 text-sm uppercase tracking-widest text-(--text-on-dark) backdrop-blur-sm text-center">
+                <div className="pointer-events-none relative flex h-full w-full items-end justify-center">
+                  <span className="w-[90%] mb-2 rounded-full border border-(--stroke-color) bg-(--muted-foreground)/20 px-6 py-3 text-sm uppercase tracking-widest text-(--text-on-dark) backdrop-blur-sm text-center">
                     Futurismo • Empatia • Impacto
                   </span>
                 </div>
@@ -698,7 +698,7 @@ export default function Home() {
       </section>
 
       <section id="sobre" className="px-6 py-24" data-animate="section">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 md:flex-row">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 sm:gap-12 md:flex-row">
           <div className="md:w-2/3 space-y-6">
             <Badge variant="secondary" className="bg-background text-(--foreground-80)">
               [Sobre mim]
@@ -739,7 +739,7 @@ export default function Home() {
       </section>
 
       <section id="skills" className="px-6 py-24" data-animate="section">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 items-center justify-center">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 sm:gap-6 items-center justify-center">
           <div className="space-y-4 text-center">
             <Badge variant="secondary" className="mx-auto bg-background text-(--foreground-80)">
               [Skills em órbita]
@@ -757,13 +757,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="experiencias" className="px-6 mt-[-80px]" data-animate="section">
-        <div className="mx-auto w-full max-w-6xl">
+      <section id="experiencias" className="px-6" data-animate="section">
+        <div className="mx-auto w-full">
           <Timeline
             data={experienceTimeline}
-            title="Experiências"
-            description="Evoluo entregando ponta a ponta: da descoberta ao ship, do protótipo ao código em produção."
-            className="bg-transparent"
+            title={<span className="text-3xl font-semibold md:text-4xl">Experiências</span>}
+            description={<span className="text-base text-(--foreground-70) md:text-lg w-full">Evoluo entregando ponta a ponta: da descoberta ao ship, do protótipo ao código em produção.</span>}
+            className="bg-transparent w-full"
           />
         </div>
       </section>
@@ -780,7 +780,7 @@ export default function Home() {
       </section>
 
       <section id="certificacoes" className="px-6 py-24 mt-[-80px]" data-animate="section">
-        <div className="mx-auto w-full max-w-6xl space-y-10">
+        <div className="mx-auto w-full max-w-6xl space-y-8 sm:space-y-10">
           <div className="space-y-4">
             <Badge variant="secondary" className="bg-background text-(--foreground-80)">
               [Certificações]
@@ -804,7 +804,7 @@ export default function Home() {
       </section>
 
       <section id="impacto" className="px-6 py-24" data-animate="section">
-        <div className="mx-auto w-full max-w-6xl space-y-10">
+        <div className="mx-auto w-full max-w-6xl space-y-8 sm:space-y-10">
           <div className="space-y-4">
             <Badge variant="secondary" className="bg-background text-(--foreground-80)">
               [Atividades & Impacto]
