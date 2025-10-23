@@ -602,7 +602,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main ref={pageRef} className="relative min-h-screen text-foreground">
+    <main ref={pageRef} className="relative min-h-screen text-foreground overflow-hidden">
 
       <PillNav
         logo="/logo-jvsc.svg"
@@ -751,7 +751,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="w-full max-w-4xl text-(--text-on-dark)">
+          <div className="w-[90%] text-(--text-on-dark)">
             <RadialOrbitalTimeline timelineData={skillOrbitData} minHeight="32rem" className="rounded-3xl" />
           </div>
         </div>

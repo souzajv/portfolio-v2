@@ -66,11 +66,11 @@ export const Timeline = ({
           <div
             key={index}
             className={cn(
-              "flex flex-col md:flex-row justify-start md:gap-10 w-full overflow-x-auto",
+              "flex flex-col md:flex-row justify-between items-center md:gap-10 w-full overflow-x-auto",
               index === 0 ? "pt-8 sm:pt-10" : "pt-8 sm:pt-10 md:pt-28"
             )}
           >
-            <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start w-full max-w-xs sm:max-w-sm md:w-full">
+            <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-center w-full max-w-xs sm:max-w-sm md:w-full">
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-background flex items-center justify-center">
                 <div className="h-4 w-4 rounded-full border border-(--stroke-color) bg-border p-2" />
               </div>
@@ -79,7 +79,7 @@ export const Timeline = ({
               </h3>
             </div>
 
-            <div className="relative pl-16 pr-2 sm:pl-20 sm:pr-4 md:pl-4 w-full min-w-0">
+            <div className="relative pl-16 pr-2 sm:pl-20 sm:pr-4 md:pl-4 w-full max-w-2xl">
               <h3 className="md:hidden block text-xl sm:text-2xl mb-4 text-left font-bold text-muted-foreground">
                 {item.title}
               </h3>

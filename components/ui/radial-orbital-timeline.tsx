@@ -287,7 +287,7 @@ export default function RadialOrbitalTimeline({
                 </div>
 
                 <div
-                  className={`absolute font-semibold tracking-wide transition-all duration-300 max-w-[120px] truncate text-xs sm:text-sm ${isExpanded ? "text-(--text-on-dark)" : "text-(--foreground-80)"}`}
+                  className={`absolute font-semibold tracking-wide transition-all duration-300 max-w-16 md:max-w-[100px] truncate text-xs sm:text-sm ${isExpanded ? "text-(--text-on-dark)" : "text-(--foreground-80)"}`}
                   style={{
                     top: LABEL_OFFSET,
                     fontSize: isMobile ? (isExpanded ? "0.9rem" : "0.8rem") : (isExpanded ? "1rem" : "0.95rem"),
@@ -298,7 +298,7 @@ export default function RadialOrbitalTimeline({
 
                 {isExpanded && (
                   <Card
-                    className="absolute left-1/2 -translate-x-1/2 w-72 border border-(--stroke-color) bg-(--surface-panel) backdrop-blur-lg shadow-xl shadow-[rgba(15,23,42,0.4)] overflow-visible"
+                    className="absolute left-1/2 -translate-x-1/2 md:w-72 border border-(--stroke-color) bg-(--surface-panel) backdrop-blur-lg shadow-xl shadow-[rgba(15,23,42,0.4)] overflow-visible"
                     style={{ top: CARD_OFFSET }}
                   >
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-(--stroke-color)"></div>
