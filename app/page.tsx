@@ -16,7 +16,6 @@ import {
   BrainCircuit,
   BrainCog,
   Code,
-  ExternalLink,
   Github,
   Layers,
   Linkedin,
@@ -32,6 +31,7 @@ import {
 } from 'lucide-react';
 import PillNav, { type PillNavItem } from '@/components/PillNav';
 import TiltedCard from '@/components/TiltedCard';
+import { Gallery4, type Gallery4Item } from '@/components/gallery4';
 import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline';
 import { Timeline } from '@/components/ui/timeline';
 import { Badge } from '@/components/ui/badge';
@@ -324,6 +324,16 @@ const projectCards: ProjectCard[] = [
     link: '#'
   },
 ];
+
+const projectGalleryItems: Gallery4Item[] = projectCards.map((project, index) => ({
+  id: `project-${index}`,
+  title: project.title,
+  description: project.description,
+  image: project.image,
+  href: project.link,
+  stack: project.stack,
+  highlightLabel: 'Destaque'
+}));
 
 const certifications: CertificationItem[] = [
   { title: 'Desenvolvimento Web Front-end', issuer: 'Rocketseat', year: '2023' },
@@ -753,73 +763,13 @@ export default function Home() {
       </section>
 
       <section id="projetos" className="px-6 py-24" data-animate="section">
-        <div className="mx-auto flex h-full w-full max-w-6xl flex-col gap-10">
-          <div className="space-y-4">
-            <Badge variant="secondary" className="bg-background text-(--foreground-80)">
-              [Projetos]
-            </Badge>
-            <h2 className="text-3xl font-semibold md:text-4xl">Construo experiências que contam histórias e entregam resultado</h2>
-            <p className="max-w-3xl text-base text-(--foreground-70)">
-              De modelos preditivos a jogos sérios, cada projeto traz escolhas de design, tecnologia e estratégia para
-              resolver problemas reais.
-            </p>
-          </div>
-
-          <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3 auto-rows-[520px]">
-            {projectCards.map(project => (
-              <div
-                key={project.title}
-                data-animate="item"
-                className="relative h-full overflow-visible rounded-3xl border border-(--stroke-color) bg-(--background-60) p-6 backdrop-blur"
-              >
-                <TiltedCard
-                  imageSrc={project.image}
-                  containerHeight="100%"
-                  imageHeight="100%"
-                  imageWidth="100%"
-                  overlayContent={
-                    <div
-                      className="flex h-full w-full flex-col justify-between rounded-[15px] border border-(--stroke-color) p-6 text-left shadow-[inset_0_1px_20px_rgba(255,255,255,0.08)]"
-                      style={{ background: 'linear-gradient(180deg, var(--surface-panel) 0%, rgba(15,23,42,0.82) 100%)' }}
-                    >
-                      <div className="space-y-3">
-                        <Badge
-                          variant="outline"
-                          className="border-(--status-border) bg-(--status-complete-bg) text-(--text-on-dark)"
-                        >
-                          Destaque
-                        </Badge>
-                        <h3 className="text-lg font-semibold text-(--text-on-dark)">{project.title}</h3>
-                        <p className="text-sm text-(--text-muted-dark)">{project.description}</p>
-                      </div>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {project.stack.map(stack => (
-                          <span
-                            key={`${project.title}-${stack}`}
-                            className="rounded-full border border-(--stroke-color) px-3 py-1 text-xs uppercase tracking-wide text-(--text-muted-dark)"
-                          >
-                            {stack}
-                          </span>
-                        ))}
-                      </div>
-                      <Button
-                        asChild
-                        size="sm"
-                        variant="ghost"
-                        className="mt-6 self-start border border-(--stroke-color) bg-(--surface-glass) text-(--text-on-dark) hover:border-(--stroke-color) hover:bg-(--status-progress-bg)"
-                      >
-                        <Link href={project.link ?? '#'} target="_blank" rel="noreferrer" className="flex items-center gap-2">
-                          Ver case
-                          <ExternalLink className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </div>
-                  }
-                  displayOverlayContent
-                />
-              </div>
-            ))}
-          </div>
+        <div className="mx-auto w-full max-w-6xl">
+          <Gallery4
+            badgeLabel="[Projetos]"
+            title="Construo experiências que contam histórias e entregam resultado"
+            description="De modelos preditivos a jogos sérios, cada projeto traz escolhas de design, tecnologia e estratégia para resolver problemas reais."
+            items={projectGalleryItems}
+          />
         </div>
       </section>
 
