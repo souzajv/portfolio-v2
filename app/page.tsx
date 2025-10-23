@@ -27,7 +27,8 @@ import {
   Sparkles,
   Target,
   TrendingUp,
-  Users
+  Users,
+  Mic2
 } from 'lucide-react';
 import PillNav, { type PillNavItem } from '@/components/PillNav';
 import TiltedCard from '@/components/TiltedCard';
@@ -343,6 +344,11 @@ const certifications: CertificationItem[] = [
 
 const impactItems: ImpactItem[] = [
   {
+    title: 'Comunicação Empática',
+    description: 'Pratico a escuta ativa para construir pontes, traduzindo desafios complexos em soluções colaborativas, promovendo um ambiente de confiança.',
+    icon: Mic2
+  },
+  {
     title: 'Mentor na Comunidade Wave',
     description: 'Preparo jovens para o processo seletivo do Inteli, compartilhando estratégias e acolhimento.',
     icon: Sparkles
@@ -366,7 +372,7 @@ const impactItems: ImpactItem[] = [
     title: 'Foco em propósito',
     description: 'Tecnologia com empatia para conectar pessoas, negócios e resultados de forma sustentável.',
     icon: Target
-  }
+  },
 ];
 
 const careerTimeline = experiencesData.map(experience => ({
